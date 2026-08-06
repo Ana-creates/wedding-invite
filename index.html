@@ -228,13 +228,18 @@
     height: auto;
   }
 
-  .hero-floral {
+  .hero-floral-pin {
     position: absolute;
-    top: -22%;
-    left: -60%;
-    width: 86%;
+    right: 0;
+    bottom: 0;
+    width: min(46vw, 420px);
     z-index: 3;
     pointer-events: none;
+  }
+
+  .hero-floral {
+    display: block;
+    width: 100%;
     opacity: 0;
     transform-origin: 30% 90%;
     will-change: transform, opacity;
@@ -315,7 +320,7 @@
   }
 
   @media (max-width: 480px) {
-    .hero-floral { width: 68%; top: -16%; left: -40%; }
+    .hero-floral-pin { width: 62vw; }
     .hero-orchid { width: 42%; top: -10%; right: -22%; }
     .hero-vinyl { width: 30%; bottom: -12%; right: -18%; }
     .hero-fan { width: 40%; bottom: -8%; left: -22%; }
@@ -788,9 +793,6 @@
           <img class="hero-plaque" src="assets/hero-card.png" alt="Tornike &amp; Liza — Celebrating love — September 5, 2026" />
         </div>
 
-        <div class="hero-floral" id="heroFloral">
-          <img src="assets/flowers.png" alt="" />
-        </div>
         <div class="hero-orchid" id="heroOrchid">
           <img src="assets/orchid.png" alt="" />
         </div>
@@ -799,6 +801,12 @@
         </div>
         <div class="hero-fan" id="heroFan">
           <img src="assets/fan.png" alt="" />
+        </div>
+      </div>
+
+      <div class="hero-floral-pin">
+        <div class="hero-floral" id="heroFloral">
+          <img src="assets/flowers.png" alt="" />
         </div>
       </div>
 
