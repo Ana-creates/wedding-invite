@@ -259,11 +259,38 @@
     animation: sway 8s ease-in-out 2s infinite;
   }
 
+  .hero-champagne-pin {
+    position: absolute;
+    left: -6%;
+    bottom: 4%;
+    width: min(26vw, 220px);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .hero-champagne {
+    display: block;
+    width: 100%;
+    opacity: 0;
+    transform-origin: 50% 100%;
+    will-change: transform, opacity;
+  }
+
+  .hero-champagne img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 480px) {
+    .hero-champagne-pin { width: 34vw; bottom: 2%; }
+  }
+
   .hero-orchid {
     position: absolute;
-    top: -14%;
-    left: -32%;
-    width: 50%;
+    top: -4%;
+    left: -14%;
+    width: 46%;
     z-index: 3;
     pointer-events: none;
     opacity: 0;
@@ -837,6 +864,12 @@
         </div>
       </div>
 
+      <div class="hero-champagne-pin">
+        <div class="hero-champagne" id="heroChampagne">
+          <img src="assets/champagne.png" alt="" />
+        </div>
+      </div>
+
       <p class="hero-scroll-cue">Scroll</p>
     </div>
   </section>
@@ -1092,6 +1125,7 @@
     const heroItems = [
       { el: document.getElementById('heroFloral'), range: [0.20, 0.48], fromRotate: -22, toRotate: -13 },
       { el: document.getElementById('heroOrchid'), range: [0.30, 0.58], fromRotate: 20, toRotate: 9, maxOpacity: 1 },
+      { el: document.getElementById('heroChampagne'), range: [0.40, 0.66], fromRotate: -14, toRotate: -4, maxOpacity: 1 },
     ];
 
     function updateHeroScrollAnim() {
