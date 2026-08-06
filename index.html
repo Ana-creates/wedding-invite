@@ -282,8 +282,80 @@
     height: auto;
   }
 
+  .hero-vinyl-pin {
+    position: absolute;
+    left: 12%;
+    bottom: 34%;
+    width: min(17vw, 150px);
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .hero-vinyl-hero {
+    display: block;
+    width: 100%;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .hero-vinyl-hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+    animation: vinyl-spin 9s linear infinite;
+  }
+
+  .hero-cake-pin {
+    position: absolute;
+    right: -4%;
+    top: 4%;
+    width: min(24vw, 210px);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .hero-cake {
+    display: block;
+    width: 100%;
+    opacity: 0;
+    transform-origin: 50% 100%;
+    will-change: transform, opacity;
+  }
+
+  .hero-cake img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-bird-pin {
+    position: absolute;
+    left: -8%;
+    top: -14%;
+    width: min(20vw, 170px);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .hero-bird {
+    display: block;
+    width: 100%;
+    opacity: 0;
+    transform-origin: 50% 30%;
+    will-change: transform, opacity;
+  }
+
+  .hero-bird img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   @media (max-width: 480px) {
     .hero-champagne-pin { width: 34vw; bottom: 2%; }
+    .hero-vinyl-pin { width: 22vw; left: 20%; bottom: 26%; }
+    .hero-cake-pin { width: 30vw; top: 2%; }
+    .hero-bird-pin { width: 26vw; top: -8%; left: -6%; }
   }
 
   .hero-orchid {
@@ -662,33 +734,34 @@
     animation: fan-wave 2.4s ease-in-out 1.5s infinite;
   }
 
-  .schedule-vinyl {
+  .schedule-floral {
     position: absolute;
-    top: -8%;
-    left: 4%;
-    width: min(18vw, 210px);
+    bottom: -10%;
+    left: -6%;
+    width: min(24vw, 260px);
     z-index: 1;
     pointer-events: none;
     opacity: 0;
-    transform: rotate(-20deg) scale(0.8);
+    transform: rotate(-16deg) scale(0.8);
     transition: opacity 1.2s ease 0.2s, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
   }
 
-  .schedule.is-visible .schedule-vinyl {
-    opacity: 0.94;
-    transform: rotate(-8deg) scale(1);
+  .schedule.is-visible .schedule-floral {
+    opacity: 1;
+    transform: rotate(-6deg) scale(1);
   }
 
-  .schedule-vinyl img {
+  .schedule-floral img {
     display: block;
     width: 100%;
     height: auto;
-    animation: vinyl-spin 9s linear infinite;
+    mix-blend-mode: multiply;
+    animation: sway 8.5s ease-in-out 1.5s infinite;
   }
 
   @media (max-width: 600px) {
     .schedule-fan { width: 78vw; right: -14%; bottom: -10%; }
-    .schedule-vinyl { width: 28vw; }
+    .schedule-floral { width: 34vw; }
   }
 
   .schedule-headline {
@@ -853,9 +926,6 @@
           <img class="hero-plaque" src="assets/hero-card.png" alt="Tornike &amp; Liza — Celebrating love — September 5, 2026" />
         </div>
 
-        <div class="hero-orchid" id="heroOrchid">
-          <img src="assets/orchid.png" alt="" />
-        </div>
       </div>
 
       <div class="hero-floral-pin">
@@ -870,6 +940,24 @@
         </div>
       </div>
 
+      <div class="hero-vinyl-pin">
+        <div class="hero-vinyl-hero" id="heroVinylHero">
+          <img src="assets/vinyl.png" alt="" />
+        </div>
+      </div>
+
+      <div class="hero-cake-pin">
+        <div class="hero-cake" id="heroCake">
+          <img src="assets/cake.png" alt="" />
+        </div>
+      </div>
+
+      <div class="hero-bird-pin">
+        <div class="hero-bird" id="heroBird">
+          <img src="assets/bird.png" alt="" />
+        </div>
+      </div>
+
       <p class="hero-scroll-cue">Scroll</p>
     </div>
   </section>
@@ -878,8 +966,8 @@
     <div class="schedule-fan">
       <img src="assets/fan.png" alt="" />
     </div>
-    <div class="schedule-vinyl">
-      <img src="assets/vinyl.png" alt="" />
+    <div class="schedule-floral">
+      <img src="assets/orchid.png" alt="" />
     </div>
 
     <h2 class="schedule-headline">The Program</h2>
@@ -1123,9 +1211,11 @@
     }
 
     const heroItems = [
-      { el: document.getElementById('heroFloral'), range: [0.20, 0.48], fromRotate: -22, toRotate: -13 },
-      { el: document.getElementById('heroOrchid'), range: [0.30, 0.58], fromRotate: 20, toRotate: 9, maxOpacity: 1 },
+      { el: document.getElementById('heroBird'), range: [0.16, 0.42], fromRotate: -18, toRotate: -8 },
+      { el: document.getElementById('heroFloral'), range: [0.30, 0.58], fromRotate: -22, toRotate: -13 },
       { el: document.getElementById('heroChampagne'), range: [0.40, 0.66], fromRotate: -14, toRotate: -4, maxOpacity: 1 },
+      { el: document.getElementById('heroVinylHero'), range: [0.46, 0.70], fromRotate: 30, toRotate: 12, maxOpacity: 0.94 },
+      { el: document.getElementById('heroCake'), range: [0.52, 0.78], fromRotate: 16, toRotate: 6, maxOpacity: 1 },
     ];
 
     function updateHeroScrollAnim() {
