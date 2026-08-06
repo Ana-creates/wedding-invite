@@ -230,9 +230,9 @@
 
   .hero-floral {
     position: absolute;
-    top: -16%;
-    left: -46%;
-    width: 62%;
+    top: -22%;
+    left: -60%;
+    width: 86%;
     z-index: 3;
     pointer-events: none;
     opacity: 0;
@@ -269,10 +269,10 @@
 
   .hero-vinyl {
     position: absolute;
-    bottom: -10%;
-    right: -12%;
-    width: 32%;
-    z-index: 1;
+    bottom: -19%;
+    right: -30%;
+    width: 34%;
+    z-index: 4;
     pointer-events: none;
     opacity: 0;
     will-change: transform, opacity;
@@ -291,9 +291,9 @@
 
   .hero-fan {
     position: absolute;
-    bottom: -12%;
-    left: -22%;
-    width: 50%;
+    bottom: -10%;
+    left: -34%;
+    width: 48%;
     z-index: 1;
     pointer-events: none;
     opacity: 0;
@@ -315,10 +315,10 @@
   }
 
   @media (max-width: 480px) {
-    .hero-floral { width: 54%; top: -12%; left: -32%; }
+    .hero-floral { width: 68%; top: -16%; left: -40%; }
     .hero-orchid { width: 42%; top: -10%; right: -22%; }
-    .hero-vinyl { width: 28%; bottom: -7%; right: -8%; }
-    .hero-fan { width: 42%; bottom: -9%; left: -16%; }
+    .hero-vinyl { width: 30%; bottom: -12%; right: -18%; }
+    .hero-fan { width: 40%; bottom: -8%; left: -22%; }
   }
 
   .hero-scroll-cue {
@@ -806,30 +806,6 @@
     </div>
   </section>
 
-  <section class="rsvp-wrap reveal">
-    <div class="rsvp-drape-spacer"></div>
-    <h2 class="rsvp-headline">R.S.V.P.</h2>
-    <p class="rsvp-question">Will you be joining us?</p>
-    <div class="rsvp-toggle" id="rsvpToggle">
-      <div class="rsvp-toggle-thumb" id="rsvpThumb"></div>
-      <button class="rsvp-btn" data-value="yes" type="button">
-        <svg class="rsvp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 20s-7.5-4.6-9.5-9A5 5 0 0 1 12 6a5 5 0 0 1 9.5 5c-2 4.4-9.5 9-9.5 9z"/>
-        </svg>
-        <span class="rsvp-btn-label">With pleasure</span>
-      </button>
-      <button class="rsvp-btn" data-value="no" type="button">
-        <svg class="rsvp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="6" width="18" height="13" rx="1.5"/>
-          <path d="M3.5 7l8.5 6 8.5-6"/>
-        </svg>
-        <span class="rsvp-btn-label">Regretfully declines</span>
-      </button>
-    </div>
-    <p class="rsvp-confirm" id="confirm"></p>
-    <img class="rsvp-stamp" id="rsvpStamp" src="assets/candle.png" alt="" />
-  </section>
-
   <section class="schedule reveal">
     <h2 class="schedule-headline">The Program</h2>
     <div class="schedule-list">
@@ -856,6 +832,30 @@
     <div class="schedule-flourish">
       <span></span><span class="diamond"></span><span></span>
     </div>
+  </section>
+
+  <section class="rsvp-wrap reveal">
+    <div class="rsvp-drape-spacer"></div>
+    <h2 class="rsvp-headline">R.S.V.P.</h2>
+    <p class="rsvp-question">Will you be joining us?</p>
+    <div class="rsvp-toggle" id="rsvpToggle">
+      <div class="rsvp-toggle-thumb" id="rsvpThumb"></div>
+      <button class="rsvp-btn" data-value="yes" type="button">
+        <svg class="rsvp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20s-7.5-4.6-9.5-9A5 5 0 0 1 12 6a5 5 0 0 1 9.5 5c-2 4.4-9.5 9-9.5 9z"/>
+        </svg>
+        <span class="rsvp-btn-label">With pleasure</span>
+      </button>
+      <button class="rsvp-btn" data-value="no" type="button">
+        <svg class="rsvp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="6" width="18" height="13" rx="1.5"/>
+          <path d="M3.5 7l8.5 6 8.5-6"/>
+        </svg>
+        <span class="rsvp-btn-label">Regretfully declines</span>
+      </button>
+    </div>
+    <p class="rsvp-confirm" id="confirm"></p>
+    <img class="rsvp-stamp" id="rsvpStamp" src="assets/candle.png" alt="" />
   </section>
 
   <section class="countdown reveal">
