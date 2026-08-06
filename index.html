@@ -70,6 +70,7 @@
 
   @media (min-width: 768px) {
     .curtain-panel { background-image: url('assets/curtain-web.jpg'); }
+    .hero-sticky { background-image: radial-gradient(ellipse at 50% 0%, rgba(80,1,5,0.05), transparent 60%), url('assets/hero-frame-bg.jpg'); }
   }
 
   .curtain-left {
@@ -162,7 +163,10 @@
     position: sticky;
     top: 0;
     min-height: 100vh;
-    background-image: radial-gradient(ellipse at 50% 0%, rgba(80,1,5,0.05), transparent 60%);
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(80,1,5,0.05), transparent 60%), url('assets/hero-frame-bg-mobile.jpg');
+    background-size: auto, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -255,7 +259,7 @@
   .hero-orchid {
     position: absolute;
     top: -14%;
-    right: -32%;
+    left: -32%;
     width: 50%;
     z-index: 3;
     pointer-events: none;
@@ -283,7 +287,7 @@
 
   @media (max-width: 480px) {
     .hero-floral-pin { width: 62vw; }
-    .hero-orchid { width: 42%; top: -10%; right: -22%; }
+    .hero-orchid { width: 42%; top: -10%; left: -22%; }
   }
 
   .hero-scroll-cue {
@@ -604,9 +608,9 @@
 
   .schedule-fan {
     position: absolute;
-    bottom: -14%;
+    bottom: -26%;
     right: -8%;
-    width: min(52vw, 720px);
+    width: min(44vw, 600px);
     z-index: 1;
     pointer-events: none;
     opacity: 0;
@@ -782,6 +786,18 @@
     margin: 0;
   }
 
+  .site-footer {
+    display: flex;
+    justify-content: center;
+    padding: 48px 24px 64px;
+  }
+
+  .footer-seal {
+    width: 56px;
+    height: auto;
+    opacity: 0.9;
+  }
+
 
 </style>
 </head>
@@ -912,6 +928,9 @@
     <p class="location-address">[Address / directions to come]</p>
   </section>
 
+  <footer class="site-footer reveal">
+    <img class="footer-seal" src="assets/candle.png" alt="Tornike &amp; Liza" />
+  </footer>
 
   <script>
     // ---------- Curtain gate ----------
