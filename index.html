@@ -463,11 +463,33 @@
     .rsvp-options { grid-template-columns: 1fr; max-width: 220px; }
   }
 
+  .petal {
+    position: fixed;
+    width: 9px;
+    height: 11px;
+    border-radius: 60% 60% 60% 0;
+    pointer-events: none;
+    z-index: 500;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    animation: petal-burst 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes petal-burst {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4) rotate(0deg); }
+    15% { opacity: 1; }
+    100% {
+      opacity: 0;
+      transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy) + 80px)) scale(1) rotate(var(--rot));
+    }
+  }
+
   /* ---------- Countdown ---------- */
 
   .countdown {
-    background: var(--maroon-dark);
-    color: var(--cream);
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(80,1,5,0.14);
+    color: var(--ink);
     text-align: center;
     padding: 64px 24px;
     max-width: 980px;
@@ -479,9 +501,9 @@
   .countdown-headline {
     font-family: 'Pinyon Script', cursive;
     font-weight: 400;
-    font-size: 44px;
+    font-size: 48px;
     margin: 0 0 28px;
-    color: var(--cream);
+    color: var(--maroon);
   }
 
   .countdown-timer {
@@ -502,10 +524,11 @@
 
   .time-block .value {
     font-family: 'Inter', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 36px;
     line-height: 1;
     letter-spacing: 0.02em;
+    color: var(--maroon);
     font-variant-numeric: tabular-nums;
   }
 
@@ -514,7 +537,7 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(251,246,236,0.65);
+    color: var(--olive);
     margin-top: 8px;
   }
 
@@ -523,7 +546,7 @@
     font-weight: 300;
     font-size: 30px;
     line-height: 1;
-    color: rgba(251,246,236,0.4);
+    color: rgba(80,1,5,0.25);
     padding-top: 2px;
   }
 
@@ -711,9 +734,15 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(80,1,5,0.15), rgba(80,1,5,0.55) 85%),
-                rgba(80,1,5,0.28);
-    mix-blend-mode: multiply;
+    background: rgba(150,60,30,0.28);
+    mix-blend-mode: soft-light;
+  }
+
+  .photo-band::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(20,5,5,0.55) 100%);
   }
 
   .photo-caption {
@@ -891,10 +920,42 @@
         void rsvpStamp.offsetWidth; // restart the stamp animation if the answer changes
         rsvpStamp.classList.add('show');
 
+        spawnPetals(btn);
+
         // TODO: wire this to the response-logging endpoint (Google Sheet via Apps Script)
         // once the guest list and hosting are finalized.
       });
     });
+
+    // ---------- Petal burst ----------
+    const petalColors = ['#500105', '#6A7D46', '#FBF6EC'];
+
+    function spawnPetals(originEl) {
+      const rect = originEl.getBoundingClientRect();
+      const originX = rect.left + rect.width / 2;
+      const originY = rect.top + rect.height / 2;
+
+      for (let i = 0; i < 16; i++) {
+        const petal = document.createElement('span');
+        petal.className = 'petal';
+
+        const angle = Math.random() * 360;
+        const distance = 55 + Math.random() * 95;
+        const dx = Math.cos(angle * Math.PI / 180) * distance;
+        const dy = Math.sin(angle * Math.PI / 180) * distance - 30;
+
+        petal.style.left = originX + 'px';
+        petal.style.top = originY + 'px';
+        petal.style.setProperty('--dx', dx + 'px');
+        petal.style.setProperty('--dy', dy + 'px');
+        petal.style.setProperty('--rot', (Math.random() * 720 - 360) + 'deg');
+        petal.style.background = petalColors[i % petalColors.length];
+        petal.style.animationDelay = (Math.random() * 0.12) + 's';
+
+        document.body.appendChild(petal);
+        petal.addEventListener('animationend', () => petal.remove());
+      }
+    }
 
     // ---------- Countdown ----------
     // TODO: replace with the real wedding date once you have it.
