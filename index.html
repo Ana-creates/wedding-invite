@@ -1012,10 +1012,20 @@
   </footer>
 
   <script>
+    // ---------- Force fresh load to start at the top ----------
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     // ---------- Curtain gate ----------
     const curtainGate = document.getElementById('curtainGate');
+    let curtainOpened = false;
 
     function openCurtains() {
+      if (curtainOpened) return;
+      curtainOpened = true;
+      window.scrollTo(0, 0);
       curtainGate.classList.add('is-open');
       setTimeout(() => {
         curtainGate.style.display = 'none';
@@ -1023,6 +1033,8 @@
     }
 
     curtainGate.addEventListener('click', openCurtains);
+    curtainGate.addEventListener('touchmove', openCurtains, { passive: true });
+    curtainGate.addEventListener('wheel', openCurtains, { passive: true });
 
     // ---------- RSVP ----------
     const buttons = document.querySelectorAll('.rsvp-btn');
