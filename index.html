@@ -167,22 +167,37 @@
   .hero-headline {
     font-family: 'Pinyon Script', cursive;
     font-weight: 400;
-    font-size: 96px;
+    font-size: 124px;
     line-height: 1;
     color: #FFFDF9;
     text-shadow: 0 2px 3px rgba(80,1,5,0.10), 0 1px 0 rgba(255,255,255,0.6);
     margin: 0 0 28px;
+  }
+
+  .hero-headline .letter {
+    display: inline-block;
     opacity: 0;
-    transform: translateY(14px);
-    animation: rise 1s ease-out 0.15s forwards;
+    transform: translateY(28px) rotate(-5deg);
+    animation: letter-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes letter-in {
+    to { opacity: 1; transform: translateY(0) rotate(0deg); }
   }
 
   .hero-plaque-wrap {
     position: relative;
-    width: min(84vw, 460px);
+    width: min(98vw, 680px);
     opacity: 0;
     transform: translateY(18px) scale(0.98);
     animation: rise-scale 1.1s ease-out 0.55s forwards;
+  }
+
+  .hero-card-layer {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    transition: transform 0.1s linear;
   }
 
   .hero-plaque {
@@ -191,30 +206,30 @@
     height: auto;
   }
 
-  .hero-card-message {
+  .hero-envelope-layer {
     position: absolute;
-    top: 63%;
-    left: 50%;
-    width: 62%;
-    transform: translateX(-50%);
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(12px, 2.6vw, 15px);
-    line-height: 1.55;
-    color: rgba(251,246,236,0.92);
-    opacity: 0;
-    animation: fade-in 1s ease-out 1.3s forwards;
+    top: -4%;
+    right: -14%;
+    width: 82%;
+    z-index: 1;
+    transition: transform 0.1s linear, opacity 0.1s linear;
+  }
+
+  .hero-envelope-layer img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   .hero-floral {
     position: absolute;
-    top: -12%;
-    left: -22%;
-    width: 52%;
-    z-index: 4;
+    top: -11%;
+    left: -15%;
+    width: 36%;
+    z-index: 3;
     pointer-events: none;
     opacity: 0;
-    transform: rotate(-14deg) scale(0.8);
+    transform: rotate(-20deg) scale(0.8);
     transform-origin: 30% 90%;
     animation: hero-floral-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.85s forwards;
   }
@@ -227,18 +242,43 @@
   }
 
   @keyframes hero-floral-in {
-    to { opacity: 1; transform: rotate(-8deg) scale(1); }
+    to { opacity: 1; transform: rotate(-13deg) scale(1); }
+  }
+
+  .hero-orchid {
+    position: absolute;
+    top: -9%;
+    right: -17%;
+    width: 42%;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transform: rotate(16deg) scale(0.8);
+    transform-origin: 20% 70%;
+    animation: hero-orchid-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1s forwards;
+  }
+
+  .hero-orchid img {
+    display: block;
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+    animation: sway 9s ease-in-out 2.2s infinite;
+  }
+
+  @keyframes hero-orchid-in {
+    to { opacity: 1; transform: rotate(9deg) scale(1); }
   }
 
   .hero-vinyl {
     position: absolute;
-    bottom: -10%;
-    right: -16%;
-    width: 40%;
-    z-index: 4;
+    bottom: -7%;
+    right: -11%;
+    width: 32%;
+    z-index: 1;
     pointer-events: none;
     opacity: 0;
-    transform: rotate(16deg) scale(0.75);
+    transform: rotate(24deg) scale(0.75);
     animation: hero-vinyl-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1.05s forwards;
   }
 
@@ -250,63 +290,23 @@
   }
 
   @keyframes hero-vinyl-in {
-    to { opacity: 0.94; transform: rotate(0deg) scale(1); }
+    to { opacity: 0.94; transform: rotate(15deg) scale(1); }
   }
 
   @keyframes vinyl-spin {
     to { transform: rotate(360deg); }
   }
 
-  .hero-polaroid {
-    position: absolute;
-    top: -7%;
-    right: -20%;
-    width: 38%;
-    z-index: 5;
-    background: #FBF6EC;
-    padding: 8px 8px 28px;
-    box-shadow: 0 18px 34px rgba(42,1,3,0.22), 0 5px 12px rgba(42,1,3,0.14);
-    opacity: 0;
-    transform: rotate(9deg) scale(0.82);
-    animation: hero-polaroid-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
-  }
-
-  .hero-polaroid-photo {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background-image: url('assets/couple.jpg');
-    background-size: cover;
-    background-position: center 25%;
-    filter: sepia(0.12) contrast(1.03);
-  }
-
-  .hero-polaroid-caption {
-    position: absolute;
-    bottom: 6px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-family: 'Pinyon Script', cursive;
-    font-weight: 400;
-    font-size: 16px;
-    color: var(--maroon);
-    margin: 0;
-  }
-
-  @keyframes hero-polaroid-in {
-    to { opacity: 1; transform: rotate(7deg) scale(1); }
-  }
-
   .hero-fan {
     position: absolute;
-    bottom: -9%;
-    left: -21%;
-    width: 42%;
-    z-index: 2;
+    bottom: -5%;
+    left: -13%;
+    width: 34%;
+    z-index: 1;
     pointer-events: none;
     opacity: 0;
     transform-origin: 84% 86%;
-    transform: rotate(-30deg) scale(0.78);
+    transform: rotate(-38deg) scale(0.78);
     animation: hero-fan-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1.35s forwards;
   }
 
@@ -319,7 +319,7 @@
   }
 
   @keyframes hero-fan-in {
-    to { opacity: 1; transform: rotate(-13deg) scale(1); }
+    to { opacity: 1; transform: rotate(-16deg) scale(1); }
   }
 
   @keyframes fan-wave {
@@ -328,11 +328,10 @@
   }
 
   @media (max-width: 480px) {
-    .hero-floral { width: 42%; top: -8%; left: -14%; }
-    .hero-vinyl { width: 32%; bottom: -8%; right: -10%; }
-    .hero-polaroid { width: 34%; top: -6%; right: -16%; }
-    .hero-fan { width: 38%; bottom: -7%; left: -16%; }
-    .hero-card-message { font-size: 11px; top: 62%; width: 66%; }
+    .hero-floral { width: 34%; top: -8%; left: -10%; }
+    .hero-orchid { width: 36%; top: -6%; right: -12%; }
+    .hero-vinyl { width: 28%; bottom: -5%; right: -8%; }
+    .hero-fan { width: 30%; bottom: -4%; left: -9%; }
   }
 
   .hero-scroll-cue {
@@ -359,7 +358,7 @@
   }
 
   @media (max-width: 480px) {
-    .hero-headline { font-size: 64px; }
+    .hero-headline { font-size: 80px; }
   }
 
   /* ---------- Scroll-reveal (shared) ---------- */
@@ -380,9 +379,12 @@
   .rsvp-wrap {
     position: relative;
     text-align: center;
-    padding: 100px 32px 116px;
-    margin-bottom: 56px;
-    overflow: hidden;
+    padding: 0 32px 116px;
+  }
+
+  .rsvp-drape-spacer {
+    width: 100%;
+    aspect-ratio: 1376 / 768;
   }
 
   .rsvp-wrap::before {
@@ -392,7 +394,7 @@
     left: 0;
     width: 100%;
     height: auto;
-    aspect-ratio: 912 / 590;
+    aspect-ratio: 1376 / 768;
     background-image: url('assets/drapery.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -415,7 +417,7 @@
     font-weight: 400;
     font-size: 64px;
     color: var(--cream);
-    margin: 0 0 14px;
+    margin: -34% 0 14px;
   }
 
   .rsvp-question {
@@ -531,7 +533,7 @@
   }
 
   @media (max-width: 420px) {
-    .rsvp-wrap { padding: 64px 24px 80px; }
+    .rsvp-wrap { padding: 180px 24px 80px; }
     .rsvp-headline { font-size: 42px; }
   }
 
@@ -796,22 +798,25 @@
   </div>
 
   <section class="hero">
-    <h1 class="hero-headline">Save the Date</h1>
+    <h1 class="hero-headline" aria-label="Save the Date"><span aria-hidden="true"><span class="letter" style="animation-delay:0.10s">S</span><span class="letter" style="animation-delay:0.14s">a</span><span class="letter" style="animation-delay:0.18s">v</span><span class="letter" style="animation-delay:0.22s">e</span> <span class="letter" style="animation-delay:0.30s">t</span><span class="letter" style="animation-delay:0.34s">h</span><span class="letter" style="animation-delay:0.38s">e</span> <span class="letter" style="animation-delay:0.46s">D</span><span class="letter" style="animation-delay:0.50s">a</span><span class="letter" style="animation-delay:0.54s">t</span><span class="letter" style="animation-delay:0.58s">e</span></span></h1>
 
-    <div class="hero-plaque-wrap">
-      <img class="hero-plaque" src="assets/plaque.png" alt="Tornike &amp; Liza" />
-      <p class="hero-card-message">We're so excited to celebrate this next chapter with the people we love most.</p>
+    <div class="hero-plaque-wrap" id="heroPlaqueWrap">
+      <div class="hero-envelope-layer" id="heroEnvelopeLayer">
+        <img src="assets/hero-envelope.png" alt="" />
+      </div>
+
+      <div class="hero-card-layer" id="heroCardLayer">
+        <img class="hero-plaque" src="assets/hero-card.png" alt="Tornike &amp; Liza — Celebrating love — September 5, 2026" />
+      </div>
 
       <div class="hero-floral">
         <img src="assets/flowers.png" alt="" />
       </div>
+      <div class="hero-orchid">
+        <img src="assets/orchid.png" alt="" />
+      </div>
       <div class="hero-vinyl">
         <img src="assets/vinyl.png" alt="" />
-      </div>
-
-      <div class="hero-polaroid">
-        <div class="hero-polaroid-photo"></div>
-        <p class="hero-polaroid-caption">Liza &amp; Tornike</p>
       </div>
 
       <div class="hero-fan">
@@ -823,6 +828,7 @@
   </section>
 
   <section class="rsvp-wrap reveal">
+    <div class="rsvp-drape-spacer"></div>
     <h2 class="rsvp-headline">R.S.V.P.</h2>
     <p class="rsvp-question">Will you be joining us?</p>
     <div class="rsvp-toggle" id="rsvpToggle">
@@ -1059,6 +1065,34 @@
     }, { threshold: 0.15 });
 
     revealEls.forEach(el => observer.observe(el));
+
+    // ---------- Hero envelope slide-away on scroll ----------
+    const heroSectionEl = document.querySelector('.hero');
+    const heroEnvelopeLayer = document.getElementById('heroEnvelopeLayer');
+    const heroCardLayer = document.getElementById('heroCardLayer');
+    let heroScrollTicking = false;
+
+    function updateHeroScrollAnim() {
+      heroScrollTicking = false;
+      const rect = heroSectionEl.getBoundingClientRect();
+      const range = rect.height * 0.55;
+      const scrolled = Math.min(Math.max(-rect.top, 0), range);
+      const progress = range > 0 ? scrolled / range : 0;
+
+      heroEnvelopeLayer.style.transform = `translate(${progress * 55}%, ${progress * -18}%) rotate(${progress * 10}deg)`;
+      heroEnvelopeLayer.style.opacity = String(1 - progress);
+
+      heroCardLayer.style.transform = `translateX(${progress * -6}%) scale(${1 + progress * 0.08})`;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!heroScrollTicking) {
+        heroScrollTicking = true;
+        requestAnimationFrame(updateHeroScrollAnim);
+      }
+    }, { passive: true });
+
+    updateHeroScrollAnim();
   </script>
 
 </body>
