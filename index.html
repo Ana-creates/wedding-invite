@@ -284,9 +284,9 @@
 
   .hero-vinyl-pin {
     position: absolute;
-    left: 12%;
-    bottom: 34%;
-    width: min(17vw, 150px);
+    left: 4%;
+    bottom: 44%;
+    width: min(23vw, 200px);
     z-index: 4;
     pointer-events: none;
   }
@@ -734,34 +734,8 @@
     animation: fan-wave 2.4s ease-in-out 1.5s infinite;
   }
 
-  .schedule-floral {
-    position: absolute;
-    bottom: -10%;
-    left: -6%;
-    width: min(24vw, 260px);
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0;
-    transform: rotate(-16deg) scale(0.8);
-    transition: opacity 1.2s ease 0.2s, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
-  }
-
-  .schedule.is-visible .schedule-floral {
-    opacity: 1;
-    transform: rotate(-6deg) scale(1);
-  }
-
-  .schedule-floral img {
-    display: block;
-    width: 100%;
-    height: auto;
-    mix-blend-mode: multiply;
-    animation: sway 8.5s ease-in-out 1.5s infinite;
-  }
-
   @media (max-width: 600px) {
     .schedule-fan { width: 78vw; right: -14%; bottom: -10%; }
-    .schedule-floral { width: 34vw; }
   }
 
   .schedule-headline {
@@ -965,9 +939,6 @@
   <section class="schedule reveal">
     <div class="schedule-fan">
       <img src="assets/fan.png" alt="" />
-    </div>
-    <div class="schedule-floral">
-      <img src="assets/orchid.png" alt="" />
     </div>
 
     <h2 class="schedule-headline">The Program</h2>
