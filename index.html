@@ -23,7 +23,7 @@
 
   * { box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
 
   html, body {
     margin: 0;
@@ -341,35 +341,6 @@
     height: auto;
   }
 
-  .hero-bird-pin {
-    position: absolute;
-    left: -8%;
-    top: -14%;
-    width: min(20vw, 170px);
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  .hero-bird {
-    display: block;
-    width: 100%;
-    opacity: 0;
-    transform-origin: 50% 30%;
-    will-change: transform, opacity;
-  }
-
-  .hero-bird img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  @media (max-width: 480px) {
-    .hero-champagne-pin { width: 34vw; bottom: 2%; }
-    .hero-vinyl-pin { width: 22vw; left: 20%; bottom: 26%; }
-    .hero-cake-pin { width: 30vw; top: 2%; }
-    .hero-bird-pin { width: 26vw; top: -8%; left: -6%; }
-  }
 
   .hero-orchid {
     position: absolute;
@@ -400,11 +371,6 @@
     50% { transform: rotate(7deg); }
   }
 
-  @media (max-width: 480px) {
-    .hero-floral-pin { width: 62vw; }
-    .hero-orchid { width: 42%; top: -10%; left: -22%; }
-  }
-
   .hero-scroll-cue {
     margin-top: 40px;
     font-family: 'Inter', sans-serif;
@@ -425,7 +391,14 @@
   }
 
   @media (max-width: 480px) {
-    .hero-headline { font-size: 80px; }
+    .hero-headline {
+      font-size: clamp(38px, 12vw, 64px);
+      white-space: nowrap;
+    }
+    .hero-floral-pin { width: 30vw; right: -3%; bottom: -2%; }
+    .hero-champagne-pin { width: 18vw; left: -3%; bottom: 2%; }
+    .hero-vinyl-pin { width: 13vw; left: 2%; top: 2%; }
+    .hero-cake-pin { width: 15vw; right: -2%; top: 2%; }
   }
 
   /* ---------- Scroll-reveal (shared) ---------- */
@@ -469,6 +442,12 @@
     z-index: 0;
   }
 
+  @media (max-width: 480px) {
+    .rsvp-drape-spacer { aspect-ratio: auto; height: 240px; }
+    .rsvp-wrap::before { aspect-ratio: auto; height: 240px; background-size: cover; background-position: center; }
+    .rsvp-headline { margin-top: -170px; }
+  }
+
   .rsvp-wrap > * {
     position: relative;
     z-index: 1;
@@ -505,6 +484,7 @@
     border-radius: 999px;
     padding: 6px;
     max-width: 100%;
+    overflow: hidden;
   }
 
   .rsvp-toggle-thumb {
@@ -919,11 +899,6 @@
         </div>
       </div>
 
-      <div class="hero-bird-pin">
-        <div class="hero-bird" id="heroBird">
-          <img src="assets/bird.webp" alt="" />
-        </div>
-      </div>
 
       <p class="hero-scroll-cue">Scroll</p>
     </div>
@@ -1174,8 +1149,7 @@
     }
 
     const heroItems = [
-      { el: document.getElementById('heroBird'), range: [0.16, 0.42], fromRotate: -18, toRotate: -8 },
-      { el: document.getElementById('heroFloral'), range: [0.30, 0.58], fromRotate: -22, toRotate: -13 },
+      { el: document.getElementById('heroFloral'), range: [0.20, 0.48], fromRotate: -22, toRotate: -13 },
       { el: document.getElementById('heroChampagne'), range: [0.40, 0.66], fromRotate: -14, toRotate: -4, maxOpacity: 1 },
       { el: document.getElementById('heroVinylHero'), range: [0.46, 0.70], fromRotate: 30, toRotate: 12, maxOpacity: 0.94 },
       { el: document.getElementById('heroCake'), range: [0.52, 0.78], fromRotate: 16, toRotate: 6, maxOpacity: 1 },
