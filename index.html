@@ -155,12 +155,9 @@
 
   .hero {
     position: relative;
-    min-height: 260vh;
   }
 
   .hero-sticky {
-    position: sticky;
-    top: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -168,7 +165,6 @@
     justify-content: center;
     padding: 48px 24px;
     text-align: center;
-    overflow: visible;
   }
 
   .hero-sticky::before {
@@ -239,13 +235,19 @@
     right: -34%;
     width: 96%;
     z-index: 1;
-    will-change: transform, opacity;
+    opacity: 0;
+    transform: rotate(6deg) scale(0.92);
+    animation: hero-envelope-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
   }
 
   .hero-envelope-layer img {
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  @keyframes hero-envelope-in {
+    to { opacity: 1; transform: rotate(0deg) scale(1); }
   }
 
   .hero-floral-pin {
@@ -262,7 +264,8 @@
     width: 100%;
     opacity: 0;
     transform-origin: 30% 90%;
-    will-change: transform, opacity;
+    transform: rotate(-22deg) scale(0.75);
+    animation: hero-floral-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.85s forwards;
   }
 
   .hero-floral img {
@@ -270,6 +273,10 @@
     width: 100%;
     height: auto;
     animation: sway 8s ease-in-out 2s infinite;
+  }
+
+  @keyframes hero-floral-in {
+    to { opacity: 1; transform: rotate(-13deg) scale(1); }
   }
 
   .hero-champagne-pin {
@@ -286,13 +293,18 @@
     width: 100%;
     opacity: 0;
     transform-origin: 50% 100%;
-    will-change: transform, opacity;
+    transform: rotate(-14deg) scale(0.75);
+    animation: hero-champagne-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1.05s forwards;
   }
 
   .hero-champagne img {
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  @keyframes hero-champagne-in {
+    to { opacity: 1; transform: rotate(-4deg) scale(1); }
   }
 
   .hero-vinyl-pin {
@@ -308,7 +320,8 @@
     display: block;
     width: 100%;
     opacity: 0;
-    will-change: transform, opacity;
+    transform: rotate(30deg) scale(0.75);
+    animation: hero-vinyl-hero-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1.25s forwards;
   }
 
   .hero-vinyl-hero img {
@@ -316,6 +329,10 @@
     width: 100%;
     height: auto;
     animation: vinyl-spin 9s linear infinite;
+  }
+
+  @keyframes hero-vinyl-hero-in {
+    to { opacity: 0.94; transform: rotate(12deg) scale(1); }
   }
 
   .hero-cake-pin {
@@ -332,13 +349,18 @@
     width: 100%;
     opacity: 0;
     transform-origin: 50% 100%;
-    will-change: transform, opacity;
+    transform: rotate(16deg) scale(0.75);
+    animation: hero-cake-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1.45s forwards;
   }
 
   .hero-cake img {
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  @keyframes hero-cake-in {
+    to { opacity: 1; transform: rotate(6deg) scale(1); }
   }
 
 
@@ -1133,58 +1155,6 @@
     }, { threshold: 0.15 });
 
     revealEls.forEach(el => observer.observe(el));
-
-    // ---------- Hero pinned scroll sequence ----------
-    const heroSectionEl = document.getElementById('heroSection');
-    const heroEnvelopeLayer = document.getElementById('heroEnvelopeLayer');
-    const heroCardLayer = document.getElementById('heroCardLayer');
-    let heroScrollTicking = false;
-
-    function clamp01(n) {
-      return Math.min(Math.max(n, 0), 1);
-    }
-
-    function rangeProgress(p, start, end) {
-      return clamp01((p - start) / (end - start));
-    }
-
-    const heroItems = [
-      { el: document.getElementById('heroFloral'), range: [0.20, 0.48], fromRotate: -22, toRotate: -13 },
-      { el: document.getElementById('heroChampagne'), range: [0.40, 0.66], fromRotate: -14, toRotate: -4, maxOpacity: 1 },
-      { el: document.getElementById('heroVinylHero'), range: [0.46, 0.70], fromRotate: 30, toRotate: 12, maxOpacity: 0.94 },
-      { el: document.getElementById('heroCake'), range: [0.52, 0.78], fromRotate: 16, toRotate: 6, maxOpacity: 1 },
-    ];
-
-    function updateHeroScrollAnim() {
-      heroScrollTicking = false;
-      const rect = heroSectionEl.getBoundingClientRect();
-      const scrollRange = rect.height - window.innerHeight;
-      const progress = scrollRange > 0 ? clamp01(-rect.top / scrollRange) : 0;
-
-      const envProg = rangeProgress(progress, 0, 0.4);
-      heroEnvelopeLayer.style.transform = `translate(${envProg * 60}%, ${envProg * -20}%) rotate(${envProg * 12}deg)`;
-      heroEnvelopeLayer.style.opacity = String(1 - envProg);
-
-      heroCardLayer.style.transform = `scale(${1 + progress * 0.24})`;
-
-      heroItems.forEach(item => {
-        const ip = rangeProgress(progress, item.range[0], item.range[1]);
-        const scale = 0.7 + ip * 0.3;
-        const rotate = item.fromRotate + (item.toRotate - item.fromRotate) * ip;
-        item.el.style.opacity = String(ip * (item.maxOpacity || 1));
-        item.el.style.transform = `rotate(${rotate}deg) scale(${scale})`;
-      });
-    }
-
-    window.addEventListener('scroll', () => {
-      if (!heroScrollTicking) {
-        heroScrollTicking = true;
-        requestAnimationFrame(updateHeroScrollAnim);
-      }
-    }, { passive: true });
-
-    window.addEventListener('resize', updateHeroScrollAnim);
-    updateHeroScrollAnim();
   </script>
 
 </body>
