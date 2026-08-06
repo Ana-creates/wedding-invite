@@ -232,6 +232,7 @@
     opacity: 0;
     transform: rotate(6deg) scale(0.92);
     animation: hero-envelope-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+    transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
   }
 
   .hero-envelope-layer img {
@@ -242,6 +243,11 @@
 
   @keyframes hero-envelope-in {
     to { opacity: 1; transform: rotate(0deg) scale(1); }
+  }
+
+  .hero-envelope-layer.is-thrown {
+    transform: translate(55vw, -18vh) rotate(38deg) scale(0.8);
+    opacity: 0;
   }
 
   .hero-floral-pin {
@@ -418,11 +424,12 @@
     text-align: center;
     padding: 0 32px 116px;
     margin-bottom: 64px;
+    --drape-h: clamp(200px, 26vw, 340px);
   }
 
   .rsvp-drape-spacer {
     width: 100%;
-    aspect-ratio: 1600 / 512;
+    height: calc(var(--drape-h) * 0.5);
   }
 
   .rsvp-wrap::before {
@@ -431,18 +438,12 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: auto;
-    aspect-ratio: 1600 / 512;
+    height: var(--drape-h);
     background-image: url('assets/drapery.webp');
-    background-size: 100% 100%;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     z-index: 0;
-  }
-
-  @media (max-width: 480px) {
-    .rsvp-drape-spacer { aspect-ratio: auto; height: 240px; }
-    .rsvp-wrap::before { aspect-ratio: auto; height: 240px; background-size: cover; background-position: center; }
-    .rsvp-headline { margin-top: -170px; }
   }
 
   .rsvp-wrap > * {
@@ -460,7 +461,7 @@
     font-weight: 400;
     font-size: 64px;
     color: var(--cream);
-    margin: -23% 0 14px;
+    margin: 0 0 14px;
   }
 
   .rsvp-question {
@@ -1003,7 +1004,6 @@
     function openCurtains() {
       if (curtainOpened) return;
       curtainOpened = true;
-      window.scrollTo(0, 0);
       curtainGate.classList.add('is-open');
       setTimeout(() => {
         curtainGate.style.display = 'none';
@@ -1124,6 +1124,21 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    // ---------- Envelope throw (one-time, safe scroll trigger) ----------
+    const heroEnvelopeLayer = document.getElementById('heroEnvelopeLayer');
+    let envelopeThrown = false;
+
+    function throwEnvelope() {
+      if (envelopeThrown) return;
+      if (window.scrollY > 40) {
+        envelopeThrown = true;
+        heroEnvelopeLayer.classList.add('is-thrown');
+        window.removeEventListener('scroll', throwEnvelope);
+      }
+    }
+
+    window.addEventListener('scroll', throwEnvelope, { passive: true });
 
     // ---------- Scroll reveal ----------
     const revealEls = document.querySelectorAll('.reveal');
