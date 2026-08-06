@@ -349,23 +349,24 @@
   .rsvp-wrap {
     position: relative;
     text-align: center;
-    padding: 84px 32px 96px;
+    padding: 100px 32px 116px;
     overflow: hidden;
-    background-image: url('assets/drapery.jpg');
-    background-size: cover;
-    background-position: center 55%;
-    max-width: 980px;
-    width: calc(100% - 32px);
-    margin: 56px auto;
-    border-radius: 28px;
+    background: linear-gradient(180deg, var(--maroon-dark), #3a0407 60%, var(--maroon-dark));
   }
 
   .rsvp-wrap::before {
     content: "";
     position: absolute;
-    inset: 0;
-    background: rgba(20, 1, 2, 0.4);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 912 / 590;
+    background-image: url('assets/drapery.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     z-index: 0;
+    opacity: 0.92;
   }
 
   .rsvp-wrap > * {
@@ -478,9 +479,9 @@
 
   .rsvp-stamp {
     display: block;
-    width: 44px;
+    width: 84px;
     height: auto;
-    margin: 16px auto 0;
+    margin: 20px auto 0;
     opacity: 0;
     transform: scale(2.4) rotate(-22deg);
     filter: drop-shadow(0 3px 6px rgba(42,1,3,0.25));
