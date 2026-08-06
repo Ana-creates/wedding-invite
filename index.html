@@ -272,46 +272,8 @@
     animation: sway 9s ease-in-out 2.2s infinite;
   }
 
-  .hero-vinyl {
-    position: absolute;
-    bottom: -19%;
-    right: -30%;
-    width: 34%;
-    z-index: 4;
-    pointer-events: none;
-    opacity: 0;
-    will-change: transform, opacity;
-  }
-
-  .hero-vinyl img {
-    display: block;
-    width: 100%;
-    height: auto;
-    animation: vinyl-spin 9s linear infinite;
-  }
-
   @keyframes vinyl-spin {
     to { transform: rotate(360deg); }
-  }
-
-  .hero-fan {
-    position: absolute;
-    bottom: -10%;
-    left: -34%;
-    width: 48%;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0;
-    transform-origin: 84% 86%;
-    will-change: transform, opacity;
-  }
-
-  .hero-fan img {
-    display: block;
-    width: 100%;
-    height: auto;
-    transform-origin: 84% 86%;
-    animation: fan-wave 2.1s ease-in-out 2.45s infinite;
   }
 
   @keyframes fan-wave {
@@ -322,8 +284,6 @@
   @media (max-width: 480px) {
     .hero-floral-pin { width: 62vw; }
     .hero-orchid { width: 42%; top: -10%; right: -22%; }
-    .hero-vinyl { width: 30%; bottom: -12%; right: -18%; }
-    .hero-fan { width: 40%; bottom: -8%; left: -22%; }
   }
 
   .hero-scroll-cue {
@@ -643,6 +603,61 @@
     z-index: 0;
   }
 
+  .schedule-fan {
+    position: absolute;
+    bottom: -14%;
+    right: -8%;
+    width: min(52vw, 720px);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transform-origin: 84% 86%;
+    transform: rotate(-30deg) scale(0.85);
+    transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .schedule.is-visible .schedule-fan {
+    opacity: 0.9;
+    transform: rotate(-14deg) scale(1);
+  }
+
+  .schedule-fan img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transform-origin: 84% 86%;
+    animation: fan-wave 2.4s ease-in-out 1.5s infinite;
+  }
+
+  .schedule-vinyl {
+    position: absolute;
+    top: -10%;
+    left: -8%;
+    width: min(20vw, 240px);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transform: rotate(-20deg) scale(0.8);
+    transition: opacity 1.2s ease 0.2s, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+  }
+
+  .schedule.is-visible .schedule-vinyl {
+    opacity: 0.94;
+    transform: rotate(-8deg) scale(1);
+  }
+
+  .schedule-vinyl img {
+    display: block;
+    width: 100%;
+    height: auto;
+    animation: vinyl-spin 9s linear infinite;
+  }
+
+  @media (max-width: 600px) {
+    .schedule-fan { width: 78vw; right: -14%; bottom: -10%; }
+    .schedule-vinyl { width: 28vw; }
+  }
+
   .schedule-headline {
     position: relative;
     z-index: 1;
@@ -796,12 +811,6 @@
         <div class="hero-orchid" id="heroOrchid">
           <img src="assets/orchid.png" alt="" />
         </div>
-        <div class="hero-vinyl" id="heroVinyl">
-          <img src="assets/vinyl.png" alt="" />
-        </div>
-        <div class="hero-fan" id="heroFan">
-          <img src="assets/fan.png" alt="" />
-        </div>
       </div>
 
       <div class="hero-floral-pin">
@@ -815,6 +824,13 @@
   </section>
 
   <section class="schedule reveal">
+    <div class="schedule-fan">
+      <img src="assets/fan.png" alt="" />
+    </div>
+    <div class="schedule-vinyl">
+      <img src="assets/vinyl.png" alt="" />
+    </div>
+
     <h2 class="schedule-headline">The Program</h2>
     <div class="schedule-list">
       <div class="schedule-row">
@@ -1055,8 +1071,6 @@
     const heroItems = [
       { el: document.getElementById('heroFloral'), range: [0.20, 0.48], fromRotate: -22, toRotate: -13 },
       { el: document.getElementById('heroOrchid'), range: [0.30, 0.58], fromRotate: 20, toRotate: 9, maxOpacity: 1 },
-      { el: document.getElementById('heroVinyl'), range: [0.42, 0.70], fromRotate: 28, toRotate: 15, maxOpacity: 0.94 },
-      { el: document.getElementById('heroFan'), range: [0.54, 0.82], fromRotate: -42, toRotate: -16 },
     ];
 
     function updateHeroScrollAnim() {
