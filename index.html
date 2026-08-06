@@ -215,7 +215,6 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    will-change: transform;
   }
 
   .hero-plaque {
@@ -359,25 +358,6 @@
   }
 
 
-  .hero-orchid {
-    position: absolute;
-    top: -4%;
-    left: -14%;
-    width: 46%;
-    z-index: 3;
-    pointer-events: none;
-    opacity: 0;
-    transform-origin: 20% 70%;
-    will-change: transform, opacity;
-  }
-
-  .hero-orchid img {
-    display: block;
-    width: 100%;
-    height: auto;
-    mix-blend-mode: multiply;
-    animation: sway 9s ease-in-out 2.2s infinite;
-  }
 
   @keyframes vinyl-spin {
     to { transform: rotate(360deg); }
@@ -494,9 +474,7 @@
   .rsvp-toggle {
     position: relative;
     display: inline-flex;
-    background: rgba(251,246,236,0.08);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(60,20,20,0.35);
     border: 1px solid rgba(251,246,236,0.3);
     border-radius: 999px;
     padding: 6px;
