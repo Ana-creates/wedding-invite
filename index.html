@@ -39,11 +39,6 @@
 
   /* ---------- Curtain gate ---------- */
 
-  html.curtain-locked, html.curtain-locked body {
-    overflow: hidden;
-    height: 100%;
-  }
-
   .curtain-gate {
     position: fixed;
     inset: 0;
@@ -1020,11 +1015,8 @@
     // ---------- Curtain gate ----------
     const curtainGate = document.getElementById('curtainGate');
 
-    document.documentElement.classList.add('curtain-locked');
-
     function openCurtains() {
       curtainGate.classList.add('is-open');
-      document.documentElement.classList.remove('curtain-locked');
       setTimeout(() => {
         curtainGate.style.display = 'none';
       }, 1450);
