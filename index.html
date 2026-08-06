@@ -297,10 +297,41 @@
     to { opacity: 1; transform: rotate(7deg) scale(1); }
   }
 
+  .hero-fan {
+    position: absolute;
+    bottom: -9%;
+    left: -21%;
+    width: 42%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transform-origin: 84% 86%;
+    transform: rotate(-30deg) scale(0.78);
+    animation: hero-fan-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1.35s forwards;
+  }
+
+  .hero-fan img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transform-origin: 84% 86%;
+    animation: fan-wave 2.1s ease-in-out 2.45s infinite;
+  }
+
+  @keyframes hero-fan-in {
+    to { opacity: 1; transform: rotate(-13deg) scale(1); }
+  }
+
+  @keyframes fan-wave {
+    0%, 100% { transform: rotate(-7deg); }
+    50% { transform: rotate(7deg); }
+  }
+
   @media (max-width: 480px) {
     .hero-floral { width: 42%; top: -8%; left: -14%; }
     .hero-vinyl { width: 32%; bottom: -8%; right: -10%; }
     .hero-polaroid { width: 34%; top: -6%; right: -16%; }
+    .hero-fan { width: 38%; bottom: -7%; left: -16%; }
     .hero-card-message { font-size: 11px; top: 62%; width: 66%; }
   }
 
@@ -350,8 +381,8 @@
     position: relative;
     text-align: center;
     padding: 100px 32px 116px;
+    margin-bottom: 56px;
     overflow: hidden;
-    background: linear-gradient(180deg, var(--maroon-dark), #3a0407 60%, var(--maroon-dark));
   }
 
   .rsvp-wrap::before {
@@ -781,6 +812,10 @@
       <div class="hero-polaroid">
         <div class="hero-polaroid-photo"></div>
         <p class="hero-polaroid-caption">Liza &amp; Tornike</p>
+      </div>
+
+      <div class="hero-fan">
+        <img src="assets/fan.png" alt="" />
       </div>
     </div>
 
