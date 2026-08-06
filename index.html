@@ -162,20 +162,33 @@
     position: sticky;
     top: 0;
     min-height: 100vh;
-    background-image: radial-gradient(ellipse at 50% 0%, rgba(80,1,5,0.05), transparent 60%), url('assets/hero-frame-bg-mobile.webp');
-    background-size: auto, contain;
-    background-position: center, center;
-    background-repeat: no-repeat, no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 48px 24px;
     text-align: center;
+    overflow: visible;
+  }
+
+  .hero-sticky::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(80,1,5,0.05), transparent 60%), url('assets/hero-frame-bg-mobile.webp');
+    background-size: auto, contain;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
   }
 
   @media (min-width: 768px) {
-    .hero-sticky { background-image: radial-gradient(ellipse at 50% 0%, rgba(80,1,5,0.05), transparent 60%), url('assets/hero-frame-bg.webp'); }
+    .hero-sticky::before { background-image: radial-gradient(ellipse at 50% 0%, rgba(80,1,5,0.05), transparent 60%), url('assets/hero-frame-bg.webp'); }
+  }
+
+  .hero-sticky > * {
+    position: relative;
+    z-index: 1;
   }
 
   .hero-headline {
@@ -697,16 +710,16 @@
     text-align: center;
     padding: 76px 24px;
     position: relative;
-    margin-top: 56px;
+    margin-top: 140px;
     margin-bottom: 56px;
   }
 
 
   .schedule-fan {
     position: absolute;
-    bottom: -26%;
+    bottom: -40%;
     right: -8%;
-    width: min(44vw, 600px);
+    width: min(38vw, 500px);
     z-index: 1;
     pointer-events: none;
     opacity: 0;
