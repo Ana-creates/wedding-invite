@@ -257,9 +257,50 @@
     to { transform: rotate(360deg); }
   }
 
+  .hero-polaroid {
+    position: absolute;
+    top: -7%;
+    right: -20%;
+    width: 38%;
+    z-index: 5;
+    background: #FBF6EC;
+    padding: 8px 8px 28px;
+    box-shadow: 0 18px 34px rgba(42,1,3,0.22), 0 5px 12px rgba(42,1,3,0.14);
+    opacity: 0;
+    transform: rotate(9deg) scale(0.82);
+    animation: hero-polaroid-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
+  }
+
+  .hero-polaroid-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-image: url('assets/couple.jpg');
+    background-size: cover;
+    background-position: center 25%;
+    filter: sepia(0.12) contrast(1.03);
+  }
+
+  .hero-polaroid-caption {
+    position: absolute;
+    bottom: 6px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'Pinyon Script', cursive;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--maroon);
+    margin: 0;
+  }
+
+  @keyframes hero-polaroid-in {
+    to { opacity: 1; transform: rotate(7deg) scale(1); }
+  }
+
   @media (max-width: 480px) {
     .hero-floral { width: 42%; top: -8%; left: -14%; }
     .hero-vinyl { width: 32%; bottom: -8%; right: -10%; }
+    .hero-polaroid { width: 34%; top: -6%; right: -16%; }
     .hero-card-message { font-size: 11px; top: 62%; width: 66%; }
   }
 
@@ -310,24 +351,20 @@
     text-align: center;
     padding: 84px 32px 96px;
     overflow: hidden;
-    background-image: url('assets/curtain-mobile.jpg');
+    background-image: url('assets/drapery.jpg');
     background-size: cover;
-    background-position: center 30%;
+    background-position: center 55%;
     max-width: 980px;
     width: calc(100% - 32px);
     margin: 56px auto;
     border-radius: 28px;
   }
 
-  @media (min-width: 768px) {
-    .rsvp-wrap { background-image: url('assets/curtain-web.jpg'); }
-  }
-
   .rsvp-wrap::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(42, 1, 3, 0.82);
+    background: rgba(20, 1, 2, 0.4);
     z-index: 0;
   }
 
@@ -357,62 +394,70 @@
     color: rgba(251,246,236,0.9);
   }
 
-  .rsvp-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: center;
-    gap: 18px;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-
-  .rsvp-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    padding: 34px 14px 26px;
+  .rsvp-toggle {
+    position: relative;
+    display: inline-flex;
     background: rgba(251,246,236,0.08);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(251,246,236,0.3);
-    border-radius: 4px;
+    border-radius: 999px;
+    padding: 6px;
+    max-width: 100%;
+  }
+
+  .rsvp-toggle-thumb {
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    left: 6px;
+    width: 0;
+    background: var(--cream);
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), width 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+    opacity: 0;
+    z-index: 0;
+  }
+
+  .rsvp-toggle.has-selection .rsvp-toggle-thumb {
+    opacity: 1;
+  }
+
+  .rsvp-btn {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 22px;
+    background: none;
+    border: none;
+    border-radius: 999px;
     font-family: 'Inter', sans-serif;
     font-size: 13px;
     letter-spacing: 0.03em;
+    white-space: nowrap;
     color: var(--cream);
     cursor: pointer;
-    transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+    transition: color 0.35s ease;
   }
 
   .rsvp-icon {
-    width: 30px;
-    height: 30px;
-    color: var(--cream);
-    transition: color 0.25s ease;
-  }
-
-  .rsvp-btn:hover {
-    border-color: var(--cream);
-    background: rgba(251,246,236,0.14);
-    transform: translateY(-3px);
-    box-shadow: 0 14px 26px rgba(0,0,0,0.25);
-  }
-
-  .rsvp-btn:active {
-    transform: scale(0.98) translateY(-1px);
+    width: 20px;
+    height: 20px;
+    color: currentColor;
+    flex: none;
+    transition: color 0.35s ease;
   }
 
   .rsvp-btn.selected {
-    background: var(--cream);
-    border-color: var(--cream);
     color: var(--maroon);
-    transform: translateY(-3px);
-    box-shadow: 0 14px 28px rgba(0,0,0,0.3);
   }
 
-  .rsvp-btn.selected .rsvp-icon {
-    color: var(--maroon);
+  @media (max-width: 380px) {
+    .rsvp-btn { padding: 12px 12px; font-size: 11.5px; gap: 6px; }
+    .rsvp-icon { width: 17px; height: 17px; }
   }
 
   .rsvp-confirm {
@@ -456,11 +501,6 @@
   @media (max-width: 420px) {
     .rsvp-wrap { padding: 64px 24px 80px; }
     .rsvp-headline { font-size: 42px; }
-    .rsvp-btn { font-size: 12px; padding: 26px 10px 20px; }
-  }
-
-  @media (max-width: 340px) {
-    .rsvp-options { grid-template-columns: 1fr; max-width: 220px; }
   }
 
   .petal {
@@ -711,115 +751,7 @@
     margin: 0;
   }
 
-  /* ---------- Keepsake flat-lay ---------- */
 
-  .keepsake {
-    display: flex;
-    justify-content: center;
-    padding: 32px 32px 100px;
-  }
-
-  .keepsake-anchor {
-    position: relative;
-    width: min(72vw, 300px);
-  }
-
-  .keepsake-polaroid {
-    position: relative;
-    z-index: 3;
-    background: #FBF6EC;
-    padding: 14px 14px 52px;
-    box-shadow: 0 22px 40px rgba(42,1,3,0.2), 0 6px 14px rgba(42,1,3,0.12);
-    opacity: 0;
-    transform: rotate(-5deg) translateY(26px) scale(0.94);
-    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .keepsake.is-visible .keepsake-polaroid {
-    opacity: 1;
-    transform: rotate(-5deg) translateY(0) scale(1);
-  }
-
-  .keepsake-photo {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background-image: url('assets/couple.jpg');
-    background-size: cover;
-    background-position: center 25%;
-    filter: sepia(0.12) contrast(1.03);
-  }
-
-  .keepsake-caption {
-    position: absolute;
-    bottom: 12px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-family: 'Pinyon Script', cursive;
-    font-weight: 400;
-    font-size: 24px;
-    color: var(--maroon);
-    margin: 0;
-  }
-
-  .keepsake-vinyl {
-    position: absolute;
-    top: -14%;
-    right: -26%;
-    width: 62%;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0;
-    transform: rotate(32deg) scale(0.8);
-    transition: opacity 1s ease 0.25s, transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
-  }
-
-  .keepsake.is-visible .keepsake-vinyl {
-    opacity: 0.96;
-    transform: rotate(20deg) scale(1);
-  }
-
-  .keepsake-vinyl img {
-    display: block;
-    width: 100%;
-    height: auto;
-    animation: vinyl-spin 9s linear infinite;
-    animation-play-state: paused;
-  }
-
-  .keepsake.is-visible .keepsake-vinyl img {
-    animation-play-state: running;
-  }
-
-  .keepsake-floral {
-    position: absolute;
-    bottom: -10%;
-    left: -22%;
-    width: 46%;
-    z-index: 4;
-    pointer-events: none;
-    opacity: 0;
-    transform: rotate(-172deg) scale(0.7);
-    transition: opacity 1s ease 0.5s, transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s;
-  }
-
-  .keepsake.is-visible .keepsake-floral {
-    opacity: 1;
-    transform: rotate(-152deg) scale(1);
-  }
-
-  .keepsake-floral img {
-    display: block;
-    width: 100%;
-    height: auto;
-    animation: sway 8.5s ease-in-out 1.5s infinite;
-  }
-
-  @media (max-width: 480px) {
-    .keepsake-anchor { width: min(80vw, 260px); }
-    .keepsake-vinyl { width: 68%; right: -30%; }
-    .keepsake-floral { width: 42%; left: -18%; }
-  }
 </style>
 </head>
 <body>
@@ -844,6 +776,11 @@
       <div class="hero-vinyl">
         <img src="assets/vinyl.png" alt="" />
       </div>
+
+      <div class="hero-polaroid">
+        <div class="hero-polaroid-photo"></div>
+        <p class="hero-polaroid-caption">Liza &amp; Tornike</p>
+      </div>
     </div>
 
     <p class="hero-scroll-cue">Scroll</p>
@@ -852,7 +789,8 @@
   <section class="rsvp-wrap reveal">
     <h2 class="rsvp-headline">R.S.V.P.</h2>
     <p class="rsvp-question">Will you be joining us?</p>
-    <div class="rsvp-options">
+    <div class="rsvp-toggle" id="rsvpToggle">
+      <div class="rsvp-toggle-thumb" id="rsvpThumb"></div>
       <button class="rsvp-btn" data-value="yes" type="button">
         <svg class="rsvp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 20s-7.5-4.6-9.5-9A5 5 0 0 1 12 6a5 5 0 0 1 9.5 5c-2 4.4-9.5 9-9.5 9z"/>
@@ -945,22 +883,6 @@
     <p class="location-address">[Address / directions to come]</p>
   </section>
 
-  <section class="keepsake reveal">
-    <div class="keepsake-anchor">
-      <div class="keepsake-vinyl">
-        <img src="assets/vinyl.png" alt="" />
-      </div>
-
-      <div class="keepsake-polaroid">
-        <div class="keepsake-photo"></div>
-        <p class="keepsake-caption">Liza &amp; Tornike</p>
-      </div>
-
-      <div class="keepsake-floral">
-        <img src="assets/flowers.png" alt="" />
-      </div>
-    </div>
-  </section>
 
   <script>
     // ---------- Curtain gate ----------
@@ -982,11 +904,22 @@
     const buttons = document.querySelectorAll('.rsvp-btn');
     const confirm = document.getElementById('confirm');
     const rsvpStamp = document.getElementById('rsvpStamp');
+    const rsvpToggle = document.getElementById('rsvpToggle');
+    const rsvpThumb = document.getElementById('rsvpThumb');
+
+    function moveThumbTo(btn) {
+      const toggleRect = rsvpToggle.getBoundingClientRect();
+      const btnRect = btn.getBoundingClientRect();
+      rsvpThumb.style.width = btnRect.width + 'px';
+      rsvpThumb.style.transform = `translateX(${btnRect.left - toggleRect.left - 6}px)`;
+      rsvpToggle.classList.add('has-selection');
+    }
 
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         buttons.forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
+        moveThumbTo(btn);
 
         const value = btn.dataset.value;
         confirm.textContent = value === 'yes'
@@ -1003,6 +936,11 @@
         // TODO: wire this to the response-logging endpoint (Google Sheet via Apps Script)
         // once the guest list and hosting are finalized.
       });
+    });
+
+    window.addEventListener('resize', () => {
+      const selected = document.querySelector('.rsvp-btn.selected');
+      if (selected) moveThumbTo(selected);
     });
 
     // ---------- Petal burst ----------
